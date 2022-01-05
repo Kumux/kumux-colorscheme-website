@@ -20,7 +20,7 @@ const valueLabelFormat = currentMoment => timeValue => {
 }
 
 export default function TimeOfDaySlider() {
-  const { currentMoment, updateCurrentMoment, latitude, longitude } = React.useContext(StateContext);
+  const { currentMoment, setCurrentMoment, latitude, longitude } = React.useContext(StateContext);
   const { sunrise, sunset, solarNoon } = SunCalc.getTimes(currentMoment.toDate(), latitude, longitude);
 
   const marks = [
@@ -39,19 +39,20 @@ export default function TimeOfDaySlider() {
   ];
 
   return (
-    <Box sx={{ width: 300 }}>
+    <>
       <Slider
-        defaultValue={currentMoment.hours() * 60 + currentMoment.minutes()}
+        value={currentMoment.hours() * 60 + currentMoment.minutes()}
         step={5}
         min={0}
         max={24 * 60 - 5}
         valueLabelDisplay="auto"
         marks={marks}
         valueLabelFormat={valueLabelFormat(currentMoment)}
-        onChange={(newValue) => {
-          updateCurrentMoment((currentMoment) => manipulateMoment(currentMoment, newValue));
+        onChange={event => {
+          setCurrentMoment(manipulateMoment(currentMoment, event.target.value).clone())
         }}
       />
-    </Box>
+      {currentMoment.format()}
+    </>
   );
 }

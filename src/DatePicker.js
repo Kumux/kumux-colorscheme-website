@@ -5,13 +5,13 @@ import DatePicker from '@mui/lab/DatePicker';
 import { StateContext } from "./stateContext";
 
 export default function CustomDatePicker() {
-  const { currentMoment, updateCurrentMoment } = React.useContext(StateContext);
+  const { currentMoment, setCurrentMoment } = React.useContext(StateContext);
 
   return (
     <DatePicker
       label="Date"
       value={currentMoment}
-      onChange={newValue => updateCurrentMoment(oldValue => newValue.clone())}
+      onChange={newValue => setCurrentMoment(newValue.clone())}
       renderInput={(params) => <TextField {...params} />}
     />
   );

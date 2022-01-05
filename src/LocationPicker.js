@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import FormLabel from '@mui/material/FormLabel';
 import { StateContext } from "./stateContext";
 
 export default function MultilineTextFields() {
@@ -8,6 +9,7 @@ export default function MultilineTextFields() {
 
   return (
     <>
+      <FormLabel component="legend">Geolocation</FormLabel>
       <TextField
         label="Latitude"
         type="number"
