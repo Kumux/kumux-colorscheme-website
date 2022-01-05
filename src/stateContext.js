@@ -25,6 +25,33 @@ const defaultThemeVariables = {
   "base0F-hex": "a87322",
 }
 
+const PRESETS = {
+  default: {
+    dayBackground: '#282c34',
+    nightBackground: '#38272c',
+  },
+
+  onedark: {
+    dayBackground: '#282c34',
+    nightBackground: '#38272c',
+  },
+
+  nordbox: {
+    dayBackground: '#2e3440',
+    nightBackground: '#282828',
+  },
+
+  dracumux: {
+    dayBackground: '#282A37',
+    nightBackground: '#372828',
+  },
+
+  solarized: {
+    dayBackground: '#002b36',
+    nightBackground: '#372f28',
+  },
+}
+
 
 const callSetNeedsFetch = debounce(setNeedsFetch => setNeedsFetch(true), 400)
 
@@ -32,6 +59,9 @@ export default function StateContextProvider({ children }) {
   const [currentMoment, setCurrentMoment] = React.useState(moment())
   const [latitude, setLatitude] = React.useState(41.390205)
   const [longitude, setLongitude] = React.useState(2.154007)
+  const [dayContrast, setDayContrast] = React.useState("6")
+  const [nightContrast, setNightContrast] = React.useState("4.5")
+  const [preset, setPreset] = React.useState("default")
   const [activeThemeVariables, setActiveThemeVariables] = React.useState(defaultThemeVariables)
   const [needsFetch, setNeedsFetch] = React.useState(true)
 
@@ -43,7 +73,7 @@ export default function StateContextProvider({ children }) {
 
   React.useEffect(() => {
     requestFetch()
-  }, [currentMoment, latitude, longitude])
+  }, [currentMoment, latitude, longitude, preset, dayContrast, nightContrast])
 
   const highlightStyle = renderTemplate(activeThemeVariables)
 
@@ -52,17 +82,27 @@ export default function StateContextProvider({ children }) {
     latitude, setLatitude,
     longitude, setLongitude,
     highlightStyle,
+    nightContrast, setNightContrast,
+    dayContrast, setDayContrast,
+    preset, setPreset,
   }
 
   if (needsFetch) {
     fetch(API_URL, {
       method: 'POST',
       body: JSON.stringify({
+        ...PRESETS[preset],
         singleMoment: true,
         kumux: 'website',
         timestamp: currentMoment.unix(),
-        dayBackground: '#282c34',
-        nightBackground: '#38272c',
+        geoLocation: {
+          latitude,
+          longitude,
+        },
+        contrast: {
+          day: parseFloat(dayContrast),
+          night: parseFloat(nightContrast),
+        },
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",

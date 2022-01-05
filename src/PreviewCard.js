@@ -11,6 +11,8 @@ import { styled } from '@mui/system';
 import TimeOfDaySlider from './TimeOfDaySlider';
 import LocationPicker from './LocationPicker';
 import DatePicker from './DatePicker';
+import ContrastPicker from './ContrastPicker';
+import PresetPicker from './PresetPicker';
 import { StateContext } from "./stateContext";
 import hljs from 'highlight.js';
 
@@ -76,6 +78,8 @@ export default function PreviewCard() {
             <Stack spacing={2}>
               <DatePicker />
               <LocationPicker />
+              <ContrastPicker />
+              <PresetPicker />
             </Stack>
           </Grid>
         </Grid>
