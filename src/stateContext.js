@@ -78,6 +78,7 @@ export default function StateContextProvider({ children }) {
   const highlightStyle = renderTemplate(activeThemeVariables)
 
   const value = {
+    activeThemeVariables,
     setCurrentMoment, currentMoment,
     latitude, setLatitude,
     longitude, setLongitude,
