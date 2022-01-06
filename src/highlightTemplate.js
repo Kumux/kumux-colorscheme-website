@@ -17,6 +17,7 @@ const renderTemplate = values =>
   .hljs {
     color: #${values["base05-hex"]};
     background: #${values["base00-hex"]};
+    box-shadow: inset 0px -6px 20px 0px #0000002b;
   }
 
   .hljs::selection,

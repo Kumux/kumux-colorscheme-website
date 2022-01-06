@@ -52,7 +52,6 @@ export default function TimeOfDaySlider() {
           setCurrentMoment(manipulateMoment(currentMoment, event.target.value).clone())
         }}
       />
-      {currentMoment.format()}
     </>
   );
 }

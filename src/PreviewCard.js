@@ -47,7 +47,7 @@ const StyledCode = styled('code')({
 
 export const CodePreview = () => {
   return (
-    <pre>
+    <pre style={{ margin: 0 }}>
       <StyledCode
         className="hljs language-typescript"
         dangerouslySetInnerHTML={{ __html: getHighlightedCodeAsHTML()}}
@@ -84,10 +84,6 @@ export default function PreviewCard() {
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
   )
 }
