@@ -23,7 +23,7 @@ const DescriptionHeading = () => {
       <Typography variant="h5" component="p" style={theme.custom.hero}>
         Kumux is the world's first dynamic circadian color scheme for code editors and other software.
       </Typography>
-      <Stack spacing={2} direction="row">
+      <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }}>
         <GitHubButton />
         <DownloadForVSCodeButton />
       </Stack>

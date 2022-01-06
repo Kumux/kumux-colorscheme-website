@@ -67,22 +67,19 @@ export default function PreviewCard() {
         <Typography gutterBottom variant="h5" component="div">
           Preview
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" gutterBottom>
           Configure your Kumux colorscheme preview here
         </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={8}>
+
+        <Stack spacing={2}>
+          <PresetPicker />
+          <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }}>
             <TimeOfDaySlider />
-          </Grid>
-          <Grid item xs={4}>
-            <Stack spacing={2}>
-              <DatePicker />
-              <LocationPicker />
-              <ContrastPicker />
-              <PresetPicker />
-            </Stack>
-          </Grid>
-        </Grid>
+            <DatePicker />
+          </Stack>
+          <LocationPicker />
+          <ContrastPicker />
+        </Stack>
       </CardContent>
     </Card>
   )
