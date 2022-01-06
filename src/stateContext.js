@@ -2,9 +2,26 @@ import * as React from 'react'
 import moment from 'moment'
 import renderTemplate from "./highlightTemplate";
 import debounce from "lodash/debounce";
+import { scaleLinear } from "d3-scale";
+import SunCalc from 'suncalc';
 
 const API_URL = "https://us-central1-kumux-color-scheme-333812.cloudfunctions.net/getColorScheme"
 export const StateContext = React.createContext()
+
+const skyColorScale = scaleLinear()
+  .domain([0, 1])
+  .range(["#000", "#65badb"])
+
+const cloudColorScale = scaleLinear()
+  .domain([0, 1])
+  .range(["#121417", "#acc0de"])
+
+const cloudShadowColorScale = scaleLinear()
+  .domain([0, 1])
+  .range(["#10305", "#183550"])
+
+
+
 
 const defaultThemeVariables = {
   "base00-hex": "282c34",
@@ -77,6 +94,19 @@ export default function StateContextProvider({ children }) {
 
   const highlightStyle = renderTemplate(activeThemeVariables)
 
+  const { altitude } = SunCalc.getPosition(currentMoment, latitude, longitude);
+  const normalizedAltitude = Math.min(Math.max(0, altitude), 0.4) / 0.4
+  const skyColor = skyColorScale(normalizedAltitude)
+  const cloudColor = cloudColorScale(normalizedAltitude)
+  const cloudShadowColor = cloudShadowColorScale(normalizedAltitude)
+
+  global.cloudsEffect.resize()
+  global.cloudsEffect.setOptions({
+    skyColor,
+    cloudColor,
+    cloudShadowColor,
+  })
+
   const value = {
     activeThemeVariables,
     setCurrentMoment, currentMoment,
@@ -86,6 +116,7 @@ export default function StateContextProvider({ children }) {
     nightContrast, setNightContrast,
     dayContrast, setDayContrast,
     preset, setPreset,
+    skyColor,
   }
 
   if (needsFetch) {

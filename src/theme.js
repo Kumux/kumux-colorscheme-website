@@ -1,13 +1,21 @@
 import * as React from 'react'
 import { StateContext } from "./stateContext";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { hsl } from "d3-color";
 
 const DynamicThemeContext = React.createContext()
 
 export default function DynamicThemeContextProvider({ children }) {
-  const { activeThemeVariables } = React.useContext(StateContext);
+  const { activeThemeVariables, skyColor } = React.useContext(StateContext);
+  const { l: lightness } = hsl(skyColor)
+  const heroTextColor = lightness < 0.4 ? "#E1E1E1" : "#111111"
 
   const theme = createTheme({
+    custom: {
+      hero: {
+        color: heroTextColor,
+      }
+    },
     palette: {
       mode: 'dark',
       background: {

@@ -10,14 +10,17 @@ import DynamicThemeContextProvider from "./theme";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import PreviewCard from "./PreviewCard";
 import StateContextProvider from "./stateContext";
+import { useTheme } from '@mui/styles';
 
 const DescriptionHeading = () => {
+  const theme = useTheme();
+
   return (
     <Stack spacing={2}>
-      <Typography variant="h2" component="h1">
+      <Typography variant="h2" component="h1" style={theme.custom.hero}>
         Kumux colorscheme
       </Typography>
-      <Typography variant="h5" component="p">
+      <Typography variant="h5" component="p" style={theme.custom.hero}>
         Kumux is the world's first dynamic circadian color scheme for code editors and other software.
       </Typography>
       <Stack spacing={2} direction="row">
