@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/kumux-colorscheme-website/static/css/main.e6c13ad2.css",
-    "main.js": "/kumux-colorscheme-website/static/js/main.2fdb3fa3.js",
-    "static/js/787.e5e18244.chunk.js": "/kumux-colorscheme-website/static/js/787.e5e18244.chunk.js",
-    "index.html": "/kumux-colorscheme-website/index.html",
-    "main.e6c13ad2.css.map": "/kumux-colorscheme-website/static/css/main.e6c13ad2.css.map",
-    "main.2fdb3fa3.js.map": "/kumux-colorscheme-website/static/js/main.2fdb3fa3.js.map",
-    "787.e5e18244.chunk.js.map": "/kumux-colorscheme-website/static/js/787.e5e18244.chunk.js.map"
+    "main.css": "/static/css/main.e6c13ad2.css",
+    "main.js": "/static/js/main.ac2e1967.js",
+    "static/js/787.e5e18244.chunk.js": "/static/js/787.e5e18244.chunk.js",
+    "index.html": "/index.html",
+    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
+    "main.ac2e1967.js.map": "/static/js/main.ac2e1967.js.map",
+    "787.e5e18244.chunk.js.map": "/static/js/787.e5e18244.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.2fdb3fa3.js"
+    "static/js/main.ac2e1967.js"
   ]
 }
