@@ -4,6 +4,7 @@ import renderTemplate from "./highlightTemplate";
 import debounce from "lodash/debounce";
 import { scaleLinear } from "d3-scale";
 import SunCalc from 'suncalc';
+import getLocationFromTimezone from '@kumux/colorscheme-engine/dist/timezoneToLocation.js'
 
 const API_URL = "https://us-central1-kumux-color-scheme-333812.cloudfunctions.net/getColorScheme"
 export const StateContext = React.createContext()
@@ -74,8 +75,8 @@ const callSetNeedsFetch = debounce(setNeedsFetch => setNeedsFetch(true), 400)
 
 export default function StateContextProvider({ children }) {
   const [currentMoment, setCurrentMoment] = React.useState(moment())
-  const [latitude, setLatitude] = React.useState(41.390205)
-  const [longitude, setLongitude] = React.useState(2.154007)
+  const [latitude, setLatitude] = React.useState(40.730610)
+  const [longitude, setLongitude] = React.useState(-73.935242)
   const [dayContrast, setDayContrast] = React.useState("6")
   const [nightContrast, setNightContrast] = React.useState("4.5")
   const [preset, setPreset] = React.useState("default")
@@ -151,6 +152,13 @@ export default function StateContextProvider({ children }) {
       })
     setNeedsFetch(false)
   }
+
+  React.useEffect(() => {
+    const coordinates = getLocationFromTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone)
+
+    setLatitude(coordinates.latitude)
+    setLongitude(coordinates.longitude)
+  }, [])
 
   return (
     <StateContext.Provider value={value}>
