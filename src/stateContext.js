@@ -107,6 +107,7 @@ export default function StateContextProvider({ children }) {
     cloudColor,
     cloudShadowColor,
   })
+  document.body.style.backgroundColor = skyColor;
 
   const value = {
     activeThemeVariables,
