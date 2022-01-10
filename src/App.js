@@ -26,6 +26,7 @@ const DescriptionHeading = () => {
       <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }}>
         <GitHubButton />
         <DownloadForVSCodeButton />
+        <DownloadForOtherSoftwareButton />
       </Stack>
     </Stack>
   )
@@ -34,6 +35,11 @@ const DescriptionHeading = () => {
 const DownloadForVSCodeButton = () => {
   const URL = "https://marketplace.visualstudio.com/items?itemName=kumux.kumux-theme"
   return <Button variant="contained" href={URL} >Download for Visual Studio Code</Button>;
+}
+
+const DownloadForOtherSoftwareButton  = () => {
+  const URL = "https://docs.google.com/forms/d/e/1FAIpQLSeGlfX2XRiV-MhzcaPLzs5z1RwINzDxQLKIHINC0N3oaOnzBQ/viewform"
+  return <Button variant="contained" href={URL} >I don't use Visual Studio Code</Button>;
 }
 
 const URL = "https://github.com/Kumux/kumux-colorscheme-engine"
