@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as Sentry from "@sentry/browser";
 import moment from 'moment'
 import renderTemplate from "./highlightTemplate";
 import debounce from "lodash/debounce";
@@ -83,15 +84,13 @@ export default function StateContextProvider({ children }) {
   const [activeThemeVariables, setActiveThemeVariables] = React.useState(defaultThemeVariables)
   const [needsFetch, setNeedsFetch] = React.useState(true)
 
+
+
   const requestFetch = React.useCallback(() => {
     if (!needsFetch) {
       callSetNeedsFetch(setNeedsFetch)
     }
   }, [setNeedsFetch, needsFetch])
-
-  React.useEffect(() => {
-    requestFetch()
-  }, [currentMoment, latitude, longitude, preset, dayContrast, nightContrast])
 
   const highlightStyle = renderTemplate(activeThemeVariables)
 
@@ -120,6 +119,17 @@ export default function StateContextProvider({ children }) {
     preset, setPreset,
     skyColor,
   }
+
+  React.useEffect(() => {
+    Sentry.addBreadcrumb({
+      category: "state",
+      message: "State changed",
+      data: value,
+      level: Sentry.Severity.Info,
+    });
+
+    requestFetch()
+  }, [currentMoment, latitude, longitude, preset, dayContrast, nightContrast])
 
   if (needsFetch) {
     fetch(API_URL, {
@@ -159,6 +169,14 @@ export default function StateContextProvider({ children }) {
 
     setLatitude(coordinates.latitude)
     setLongitude(coordinates.longitude)
+
+    Sentry.addBreadcrumb({
+      category: "state",
+      message: "Timezone data",
+      data: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      level: Sentry.Severity.Info,
+    });
+
   }, [])
 
   return (
