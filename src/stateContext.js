@@ -121,6 +121,7 @@ export default function StateContextProvider({ children }) {
   }
 
   React.useEffect(() => {
+    Sentry.setUser({ id: "unknown web user", Timezone: Intl.DateTimeFormat().resolvedOptions().timeZone });
     Sentry.addBreadcrumb({
       category: "state",
       message: "State changed",
