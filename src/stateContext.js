@@ -164,6 +164,7 @@ export default function StateContextProvider({ children }) {
     setNeedsFetch(false)
   }
 
+
   React.useEffect(() => {
     const coordinates = getLocationFromTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
@@ -176,7 +177,7 @@ export default function StateContextProvider({ children }) {
       data: Intl.DateTimeFormat().resolvedOptions().timeZone,
       level: Sentry.Severity.Info,
     });
-
+    Sentry.setUser({ id: "unknown web user", Timezone: Intl.DateTimeFormat().resolvedOptions().timeZone });
   }, [])
 
   return (
